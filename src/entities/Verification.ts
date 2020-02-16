@@ -1,15 +1,13 @@
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  BeforeInsert,
-  ManyToOne
+  UpdateDateColumn
 } from 'typeorm'
 import { verificationTarget } from './../types/types.d'
-import User from './User'
 
 const PHONE = 'PHONE'
 const EMAIL = 'EMAIL'
@@ -28,19 +26,11 @@ class Verification extends BaseEntity {
   key: string
 
   @Column({ type: 'boolean', default: false })
-  used: boolean
+  verified: boolean
 
-  @CreateDateColumn({ type: 'text' })
-  createdAt: string
+  @CreateDateColumn() createdAt: string
 
-  @UpdateDateColumn({ type: 'text' })
-  updatedAt: string
-
-  @ManyToOne(
-    type => User,
-    user => user.verifications
-  )
-  user: User
+  @UpdateDateColumn() updatedAt: string
 
   @BeforeInsert()
   createKey(): void {
@@ -48,7 +38,7 @@ class Verification extends BaseEntity {
       this.key = Math.floor(Math.random() * 100000).toString()
     } else if (this.target === EMAIL) {
       this.key = Math.random()
-        .toString(26)
+        .toString(36)
         .substr(2)
     }
   }
