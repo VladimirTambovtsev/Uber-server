@@ -4,9 +4,12 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany,
+  ManyToOne
 } from 'typeorm'
 import { rideStatus } from './../types/types.d'
+import User from './User'
 
 @Entity()
 class Ride extends BaseEntity {
@@ -44,6 +47,18 @@ class Ride extends BaseEntity {
 
   @Column({ type: 'text' })
   duration: string
+
+  @ManyToOne(
+    type => User,
+    user => user.ridesAsPassenger
+  )
+  passenger: User
+
+  @ManyToOne(
+    type => User,
+    user => user.ridesAsDriver
+  )
+  driver: User
 
   @CreateDateColumn()
   createdAt: string
