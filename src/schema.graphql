@@ -1,9 +1,46 @@
-type Query {
-  sayBye: String!
-  sayHello: String!
+type Place {
+  id: Int!
+  name: String
+  lat: Float!
+  lng: Float!
+  address: String!
+  isFav: Boolean!
+  createdAt: String!
+  updatedAt: String
 }
 
-type Greeting {
-  text: String!
-  error: Boolean!
+type User {
+  id: Int!
+  email: String!
+  firstname: String!
+  lastname: String!
+  age: Int
+  password: String
+  phoneNumber: String
+  verifiedEmail: Boolean!
+  verifiedPhoneNumber: Boolean!
+  profilePhoto: String
+  createdAt: String!
+  updatedAt: String
+  fullName: String
+  isDriving: Boolean!
+  isRiding: Boolean!
+  isTaken: Boolean!
+  lastLng: Float!
+  lastLat: Float!
+  lastOrientation: Float
+}
+
+type Query {
+  user: User
+}
+
+type Verification {
+  id: Int!
+  target: String!
+  payload: String!
+  key: String!
+  used: Boolean!
+  createdAt: String!
+  updatedAt: String!
 }
