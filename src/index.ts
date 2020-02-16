@@ -1,5 +1,10 @@
+import dotenv from 'dotenv'
 import { Options } from 'graphql-yoga'
+import { createConnection } from 'typeorm'
 import app from './app'
+import connectionOptions from './ormConfig'
+
+dotenv.config()
 
 const PORT: string | number = process.env.PORT || 4000
 const PLAYGROUND: string = '/playground'
@@ -11,4 +16,8 @@ const appOptions: Options = {
   endpoint: GRAPHQL_ENDPOINT
 }
 
-app.start(appOptions, () => console.log(`Server is running on ${PORT}`))
+createConnection(connectionOptions)
+  .then(() => {
+    app.start(appOptions, () => console.log(`Server is running on ${PORT}`))
+  })
+  .catch(err => console.log('Error Connecting to PostgreSQL: ', err))
