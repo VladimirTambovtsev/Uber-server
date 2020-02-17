@@ -1,5 +1,5 @@
 import { Resolvers } from '../../../../types/resolvers'
-import privateResolver from '../../../../utils/resolverMiddleware'
+import privateResolver from '../../../../utils/privateResolver'
 
 const resolvers: Resolvers = {
   Query: {

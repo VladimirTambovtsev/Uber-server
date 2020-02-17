@@ -1,4 +1,3 @@
-import { sendVerificationEmail } from './../../../../utils/sendEmail'
 import User from '../../../../entities/User'
 import Verification from '../../../../entities/Verification'
 import createJWT from '../../../../utils/createJWT'
@@ -7,6 +6,7 @@ import {
   EmailSignUpResponse
 } from './../../../../types/graph.d'
 import { Resolvers } from './../../../../types/resolvers.d'
+import { sendVerificationEmail } from './../../../../utils/sendEmail'
 
 const resolvers: Resolvers = {
   Mutation: {
