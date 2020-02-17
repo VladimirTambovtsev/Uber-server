@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { verificationTarget } from './../types/types.d'
+import { verificationTarget } from '../types/types'
 
 const PHONE = 'PHONE'
 const EMAIL = 'EMAIL'
@@ -43,5 +43,4 @@ class Verification extends BaseEntity {
     }
   }
 }
-
 export default Verification

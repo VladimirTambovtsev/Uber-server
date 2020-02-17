@@ -1,10 +1,11 @@
-import dotenv from 'dotenv'
+import { config } from 'dotenv'
 import { Options } from 'graphql-yoga'
+import { resolve } from 'path'
 import { createConnection } from 'typeorm'
 import app from './app'
 import connectionOptions from './ormConfig'
 
-dotenv.config()
+config({ path: resolve(__dirname, '../.env') })
 
 const PORT: string | number = process.env.PORT || 4000
 const PLAYGROUND: string = '/playground'
