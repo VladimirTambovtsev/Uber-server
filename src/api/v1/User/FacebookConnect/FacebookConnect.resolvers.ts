@@ -2,8 +2,8 @@ import User from '../../../../entities/User'
 import {
   FacebookConnectMutationArgs,
   FacebookConnectResponse
-} from './../../../../types/graph.d'
-import { Resolvers } from './../../../../types/resolvers.d'
+} from '../../../../types/graph'
+import { Resolvers } from '../../../../types/resolvers'
 
 const resolvers: Resolvers = {
   Mutation: {
