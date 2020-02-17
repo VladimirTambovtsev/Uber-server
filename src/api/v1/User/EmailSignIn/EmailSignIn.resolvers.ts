@@ -1,3 +1,4 @@
+import createJWT from '../../../../utils/createJWT'
 import User from '../../../../entities/User'
 import {
   EmailSignInMutationArgs,
@@ -12,6 +13,7 @@ const resolvers: Resolvers = {
       args: EmailSignInMutationArgs
     ): Promise<EmailSignInResponse> => {
       const { email, password } = args
+
       try {
         const user = await User.findOne({ email })
         if (!user) {
@@ -21,26 +23,16 @@ const resolvers: Resolvers = {
             token: null
           }
         }
+
         const checkPassword = await user.comparePassword(password)
         if (checkPassword) {
-          return {
-            ok: true,
-            error: null,
-            token: 'Coming soon'
-          }
+          const token = createJWT(user.id)
+          return { ok: true, error: null, token }
         } else {
-          return {
-            ok: false,
-            error: null,
-            token: 'Wrong password'
-          }
+          return { ok: false, error: null, token: 'Wrong password' }
         }
       } catch (error) {
-        return {
-          ok: false,
-          error: error.message,
-          token: null
-        }
+        return { ok: false, error: error.message, token: null }
       }
     }
   }
