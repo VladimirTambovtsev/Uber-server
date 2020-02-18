@@ -3,26 +3,23 @@ import { Resolvers } from '../../../../types/resolvers'
 import cleanNullArgs from '../../../../utils/cleanNullArgs'
 import privateResolver from '../../../../utils/privateResolver'
 import {
-  UpdateMyProfileMutationArgs,
-  UpdateMyProfileResponse
+  ReportMovementMutationArgs,
+  ReportMovementResponse
 } from './../../../../types/graph.d'
 
 const resolvers: Resolvers = {
   Mutation: {
-    UpdateMyProfile: privateResolver(
+    ReportMovement: privateResolver(
       async (
         _,
-        args: UpdateMyProfileMutationArgs,
+        args: ReportMovementMutationArgs,
         { req }
-      ): Promise<UpdateMyProfileResponse> => {
-        const user: User = req.user
+      ): Promise<ReportMovementResponse> => {
+        const user: User = req.User
         const notNull = cleanNullArgs(args)
         try {
-          if (args.password !== null) {
-            user.password = args.password
-            user.save()
-          }
           await User.update({ id: user.id }, { ...notNull })
+
           return { ok: true, error: null }
         } catch (error) {
           return { ok: false, error: error.message }
