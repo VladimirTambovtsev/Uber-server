@@ -13,12 +13,24 @@ const resolvers: Resolvers = {
             { relations: ['places'] }
           )
           if (user) {
-            return { ok: true, places: user.places, error: null }
+            return {
+              ok: true,
+              places: user.places,
+              error: null
+            }
           } else {
-            return { ok: false, places: null, error: 'User not found' }
+            return {
+              ok: false,
+              places: null,
+              error: 'User not found'
+            }
           }
         } catch (error) {
-          return { ok: false, error: error.message, places: null }
+          return {
+            ok: false,
+            error: error.message,
+            places: null
+          }
         }
       }
     )
